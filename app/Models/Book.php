@@ -2,12 +2,12 @@
 
 require_once 'BaseProduct.php';
 
-class Book extends BaseProduct {
+class Book extends Product {
     private $isbn;
     private $publisher;
     private $author;
     private $pages;
-    private $profitBonus;
+    private $profitBonus = 0.05;
 
     public function __constuct($_id, $_title, $_price, $_description, $_isbn, $_publisher, $_autor, $_pages, $_profitBonus) {
         parent::__constuct($_id, $_title, $_price, $_description);
@@ -18,7 +18,11 @@ class Book extends BaseProduct {
         $this->profitBonus = $_profitBonus;
     }
 
+    public function getTitle() {
+        return $this->title;
+    }
+
     public function getProfit() {
-        return $this->price * (0.1 + $this->profitBonus);
+        return round($this->price * (0.1 + $this->profitBonus), 2);
     }
 }
